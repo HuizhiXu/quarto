@@ -17,6 +17,17 @@ quarto render uncertainty.qmd --to html
 quarto render uncertainty.qmd --to docx
 ```
 
+
 ### 3. Display
 The generated files are in the same folder as the qmd file.
 The html file can be displayed in the browser. The docx file can be opened in Word.
+
+
+### 4. Qmd grammer
+- add image
+```
+![1.png](1.jpg){width="80%" fig-align="right"}
+```
+
+
+- md格式的 math equation的加粗是\bold，在qmd里面是 \boldsymbol
