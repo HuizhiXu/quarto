@@ -136,8 +136,10 @@ K_{1|2} = K_{11} - K_{12}K_{22}^{-1}K_{21}
 <section id="从高斯分布抽样" class="level2">
 <h2 class="anchored" data-anchor-id="从高斯分布抽样">3. 从高斯分布抽样</h2>
 <p>如何生成遵循某种特定分布的样本呢？假设我们想要从高斯分布<span class="math inline">\(N(\mu,\sigma^2)\)</span>中采样。</p>
+<section id="单变量高斯分布" class="level3">
+<h3 class="anchored" data-anchor-id="单变量高斯分布">单变量高斯分布</h3>
 <p>一个常见的方法是首先从标准正态分布N(0,1)产生一个随机数x，然后应用scale-location transformation（尺度-位置变化）得到一个样本<span class="math inline">\(\sigma x + \mu\)</span>。</p>
-<p>那么怎么从标准正态分布产生随机数？一般的方法是用标准高斯分布的逆累积分布函数(inverse cumulative distribution function )对均匀随机变量进行变换。例如，如果U均匀分布在[0,1]上，那么<span class="math inline">\(\phi^{-1}(U)\)</span> 将遵循标准正太分布，其中<span class="math inline">\(\phi^{-1}\)</span>是标准正态分布累积函数的倒数。</p>
+<p>那么怎么从标准正态分布产生随机数？一般的方法是用标准高斯分布的逆累积分布函数(inverse cumulative distribution function )对均匀随机变量进行变换。例如，如果U均匀分布在[0,1]上，那么<span class="math inline">\(\phi^{-1}(U)\)</span> 将遵循标准正态分布，其中<span class="math inline">\(\phi^{-1}\)</span>是标准正态分布累积函数的倒数。</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/gp_2.png" class="img-fluid figure-img"></p>
@@ -150,7 +152,35 @@ K_{1|2} = K_{11} - K_{12}K_{22}^{-1}K_{21}
 <li>使用inverse cumulative function，转换成相应的CDF值</li>
 <li>进行scale-location变换</li>
 </ol>
-<p>那么，如何拓展到多元情形呢？如何从具有任意均值向量和协方差矩阵的二元高斯分布中采样。</p>
+</section>
+<section id="多变量高斯分布" class="level3">
+<h3 class="anchored" data-anchor-id="多变量高斯分布">多变量高斯分布</h3>
+<p>那么，如何拓展到多元情形呢？如何从具有任意均值向量和协方差矩阵的二元高斯分布中采样？</p>
+<p>从标准的二元正态分布抽样开始，然后进行scale-location变换。</p>
+<p>第一步：如何从标准的二元正态分布</p>
+<p><span class="math display">\[
+N(\begin{bmatrix}
+0 \\0 \end{bmatrix} ,\begin{bmatrix}
+1&amp;0 \\0&amp;1 \end{bmatrix})
+\]</span></p>
+<p>中进行采样</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+x_1 \\x_2 \end{bmatrix}
+\]</span></p>
+<p>因为上述的协方差非对角线都是0，那就是说x_1和x_2不相关。那么可以对x_1和x_2进行单独采样。</p>
+<p>根据边缘分布</p>
+<p><span class="math display">\[
+x_1 \sim N(0, 1)
+\]</span></p>
+<p><span class="math display">\[
+x_2 \sim N(0, 1)
+\]</span></p>
+<p>就又变回了从一元标准正态分布中抽样。</p>
+<p>第二步：如何用协方差矩阵K来进行scale-location变换呢？（前面说过进行 <span class="math inline">\(\sigma x + \mu\)</span> 的变换就可以得到遵循<span class="math inline">\(N(\mu,\sigma^2)\)</span>的分布）。</p>
+<p>可以使用Cholesky decomposition来计算——给定一个对称正定矩阵K，Cholesky分解将其表示为下三角矩阵L和其转置的乘积L^T。具体而言，Cholesky分解的结果是<span class="math inline">\(K=LL^T\)</span>。</p>
+<p>因此进行 <span class="math inline">\(L x + \mu\)</span> 的变换就可以得到遵循<span class="math inline">\(N(\mu,K)\)</span>的分布。</p>
+</section>
 </section>
 </section>
 
