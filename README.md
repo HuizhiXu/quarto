@@ -9,6 +9,10 @@ install the quarto extension in VSCode
 quarto preview gaussian_process.ipynb
 ```
 
+jupyter notebook 转为qmd
+```
+quarto convert gaussian_process_in_practice.ipynb
+```
 
 
 #### Qmd File (To html/docx)
@@ -16,6 +20,8 @@ quarto preview gaussian_process.ipynb
 quarto render uncertainty.qmd --to html
 quarto render uncertainty.qmd --to docx
 ```
+
+
 
 
 ### 3. Display
