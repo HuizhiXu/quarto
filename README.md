@@ -37,3 +37,32 @@ The html file can be displayed in the browser. The docx file can be opened in Wo
 
 
 - md格式的 math equation的加粗是\bold，在qmd里面是 \boldsymbol
+
+
+
+### 5. qmd
+
+#### qmd quarto
+```markdown
+
+---
+title: "论文 Uncertainty Quantification in Machine Learning for Engineering Design and Health Prognostics"
+format:
+  html: 
+    cold-fold: true
+---
+
+```
+
+#### qmd hugo
+
+```markdown
+---
+title: "书籍 Bayesian Optimization Theory and Practice using Python 之Gaussian Process"
+date: 2023-11-25T18:01:50+08:00  
+tags: ["tech","bayesian"]
+format: hugo-md
+html-math-method: webtex
+thumbnail: https://picsum.photos/id/302/400/250
+---
+```
